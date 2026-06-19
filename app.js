@@ -2,7 +2,13 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
+app.use(cors({
+  origin: [
+    'https://ecommerce-front-nine-phi.vercel.app'
+  ],
+  methods: ['GET','POST','PUT','DELETE'],
+  credentials: true
+}));
 
 const app = express();
 
