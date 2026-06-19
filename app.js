@@ -2,20 +2,17 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
-app.use(cors({
-  origin: [
-    'https://ecommerce-front-nine-phi.vercel.app'
-  ],
-  methods: ['GET','POST','PUT','DELETE'],
-  credentials: true
-}));
+const cors = require('cors');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
+}));
+
 app.use(express.json());
 
-// CONEXION MONGODB ATLAS
 mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log('MongoDB Atlas conectado'))
 .catch(err => console.error(err));
@@ -33,11 +30,11 @@ app.use('/pedidos', pedidoRoutes);
 app.use('/reportes', reporteRoutes);
 
 app.get('/', (req, res) => {
-    res.send('API Ecommerce funcionando');
+  res.send('API Ecommerce funcionando');
 });
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en puerto ${PORT}`);
+  console.log(`Servidor corriendo en puerto ${PORT}`);
 });
